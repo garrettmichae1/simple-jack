@@ -1,0 +1,116 @@
+.row-flow {
+  position: absolute;
+  left: -65px;
+  top: 0;
+  z-index: 5;
+  overflow: visible;
+  pointer-events: none;
+  contain: layout style;
+}
+
+.row-flow__guide,
+.row-flow__glow,
+.row-flow__trace {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.row-flow__guide {
+  stroke: #b6ce9e;
+  stroke-width: 0.6;
+  opacity: 0.14;
+}
+
+.row-flow__glow {
+  stroke-width: 2.5;
+  opacity: 0.3;
+  stroke-dasharray: 1;
+  animation: row-flow-draw 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.row-flow__trace {
+  stroke-width: 1;
+  opacity: 0.9;
+  stroke-dasharray: 1;
+  animation: row-flow-draw 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.row-flow__origin {
+  fill: #dbbd87;
+  opacity: 0.85;
+}
+
+.row-flow__factor {
+  fill: #d1c49a;
+  font:
+    9px "DM Sans",
+    sans-serif;
+  letter-spacing: 0.25px;
+  paint-order: stroke;
+  stroke: #142018;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  animation: row-flow-label 0.5s 0.15s both;
+}
+
+.row-flow__traveler {
+  animation: row-flow-traveler 1.3s both;
+}
+
+.row-flow--sweep .row-flow__trace {
+  stroke-width: 0.75;
+  opacity: 0.55;
+}
+
+.row-flow--sweep .row-flow__guide {
+  opacity: 0.05;
+}
+
+@keyframes row-flow-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes row-flow-traveler {
+  0% {
+    opacity: 0;
+  }
+  8%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes row-flow-label {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
+.row-flow--still *,
+.row-flow--still .row-flow__trace,
+.row-flow--still .row-flow__glow {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-flow * {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
+  .row-flow__traveler {
+    display: none;
+  }
+}
